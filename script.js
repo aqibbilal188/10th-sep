@@ -989,7 +989,7 @@ window.testShowMoodFeature = function() {
 // Make showMoodFeature globally accessible
 window.showMoodFeature = function() {
     console.log('showMoodFeature called');
-    alert('Mood button clicked!'); // Debug alert
+    
     const moodTrackerPage = document.getElementById('moodTrackerPage');
     
     if (!moodTrackerPage) {
