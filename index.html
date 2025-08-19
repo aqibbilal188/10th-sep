@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="A romantic birthday website for Zoya with period tracker and love messages">
+    <meta name="keywords" content="birthday, romantic, period tracker, love">
+    <meta name="author" content="Your Love">
+    <meta name="theme-color" content="#93E9BE">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Zoya's Birthday">
+    <title>Happy Birthday Zoya! 🎂</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💕</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <!-- Animated Background -->
+        <div class="animated-bg"></div>
+        
+        <!-- Flower Petals Animation -->
+        <div class="petals-container">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="birthday-card">
+                <div class="glow-effect">
+                    <h1 class="main-title">I love you Zoya</h1>
+                    <h2 class="advance-birthday">ADVANCE HAPPY BIRTHDAY MY LOVE!</h2>
+                </div>
+                
+                <div class="countdown-container">
+                    <h2 class="countdown-title">💕 Countdown to Your Special Day 💕</h2>
+                    <div class="countdown" id="countdown">
+                        <div class="countdown-item">
+                            <span class="number" id="days">00</span>
+                            <span class="label">Days</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="number" id="hours">00</span>
+                            <span class="label">Hours</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="number" id="minutes">00</span>
+                            <span class="label">Minutes</span>
+                        </div>
+                        <div class="countdown-item">
+                            <span class="number" id="seconds">00</span>
+                            <span class="label">Seconds</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="coming-soon-message">
+                    <p class="coming-soon-text">Stay tuned for something amazing, my love! 💕</p>
+                    <button class="click-here-btn" onclick="showQuizPage()">Click Here</button>
+                </div>
+
+                <div class="floating-hearts">
+                    <div class="heart">❤️</div>
+                    <div class="heart">💕</div>
+                    <div class="heart">💖</div>
+                    <div class="heart">💝</div>
+                    <div class="heart">💗</div>
+                </div>
+                
+                <!-- I Love You Background -->
+                <div class="love-background" id="loveBackground"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Toggle - Outside Card for Better Mobile Visibility -->
+    <div class="theme-toggle">
+        <button id="themeToggle" class="theme-btn">
+            <span class="light-icon">☀️</span>
+            <span class="dark-icon">🌙</span>
+        </button>
+    </div>
+
+    <!-- Quiz Page -->
+    <div id="quizPage" class="quiz-page">
+        <!-- I Love You Background for Quiz -->
+        <div class="quiz-love-background" id="quizLoveBackground"></div>
+        
+        <!-- Theme Toggle for Quiz Page -->
+        <div class="quiz-theme-toggle">
+            <button id="quizThemeToggle" class="quiz-theme-btn">
+                <span class="quiz-light-icon">☀️</span>
+                <span class="quiz-dark-icon">🌙</span>
+            </button>
+        </div>
+        
+        <div class="quiz-content">
+            <h1 class="quiz-title">Answer These Questions, My Love 💕</h1>
+            
+            <div class="quiz-container">
+                <div class="question" id="question1">
+                    <h2>1. On what date did you say "ap meku pasand hai"?</h2>
+                    <div class="options">
+                        <button class="option-btn" onclick="checkAnswer(1, '23rd oct 2024')">23rd Oct 2024</button>
+                        <button class="option-btn" onclick="checkAnswer(1, 'wrong')">15th Sep 2024</button>
+                        <button class="option-btn" onclick="checkAnswer(1, 'wrong')">8th Nov 2024</button>
+                        <button class="option-btn" onclick="checkAnswer(1, 'wrong')">12th Dec 2024</button>
+                    </div>
+                </div>
+                
+                <div class="question" id="question2" style="display: none;">
+                    <h2>2. What is your favorite memory with me?</h2>
+                    <div class="options">
+                        <button class="option-btn" onclick="checkAnswer(2, 'wrong')">First hug</button>
+                        <button class="option-btn" onclick="checkAnswer(2, 'wrong')">First touch</button>
+                        <button class="option-btn" onclick="checkAnswer(2, 'metro')">Metro</button>
+                        <button class="option-btn" onclick="checkAnswer(2, 'wrong')">Bus</button>
+                    </div>
+                </div>
+                
+                <div class="question" id="question3" style="display: none;">
+                    <h2>3. What is my favorite hobby?</h2>
+                    <div class="options">
+                        <button class="option-btn" onclick="checkAnswer(3, 'wrong')">Trading</button>
+                        <button class="option-btn" onclick="checkAnswer(3, 'wrong')">Gym</button>
+                        <button class="option-btn" onclick="checkAnswer(3, 'wrong')">Cricket</button>
+                        <button class="option-btn" onclick="checkAnswer(3, 'Kissing you everywhere')">Kissing you everywhere</button>
+                    </div>
+                </div>
+                
+                <div class="question" id="question4" style="display: none;">
+                    <h2>4. Who am I to you?</h2>
+                    <div class="text-answer">
+                        <textarea id="answer4" placeholder="Write your answer here, my love..." rows="4"></textarea>
+                        <button class="submit-btn" onclick="checkTextAnswer()">Submit Answer</button>
+                    </div>
+                </div>
+            </div>
+            
+            <button class="back-btn" onclick="hideQuizPage()">Back to Me</button>
+        </div>
+    </div>
+
+    <!-- Welcome Page -->
+    <div id="welcomePage" class="welcome-page">
+        <!-- I Love You Background for Welcome -->
+        <div class="welcome-love-background" id="welcomeLoveBackground"></div>
+        
+        <!-- Theme Toggle for Welcome Page -->
+        <div class="welcome-theme-toggle">
+            <button id="welcomeThemeToggle" class="welcome-theme-btn">
+                <span class="welcome-light-icon">☀️</span>
+                <span class="welcome-dark-icon">🌙</span>
+            </button>
+        </div>
+        
+        <div class="welcome-content">
+            <h1 class="welcome-title">Welcome Babe Doll 💖</h1>
+            <div class="welcome-options">
+                <button class="welcome-option" onclick="openPeriodTracker()">Period Tracker 📅</button>
+                <button class="welcome-option" onclick="showMoodFeature()">Moods Now 💕</button>
+                <button class="welcome-option" onclick="comingSoon()">Coming Soon 🚀</button>
+                <button class="welcome-option" onclick="comingSoon()">Coming Soon 🚀</button>
+            </div>
+            <button class="back-btn" onclick="hideWelcomePage()">Back to Quiz</button>
+        </div>
+    </div>
+
+    <!-- Period Tracker Page -->
+    <div id="periodTrackerPage" class="period-tracker-page">
+        <!-- I Love You Background for Period Tracker -->
+        <div class="tracker-love-background" id="trackerLoveBackground"></div>
+        
+        <!-- Theme Toggle for Period Tracker -->
+        <div class="tracker-theme-toggle">
+            <button id="trackerThemeToggle" class="tracker-theme-btn">
+                <span class="tracker-light-icon">☀️</span>
+                <span class="tracker-dark-icon">🌙</span>
+            </button>
+        </div>
+        
+        <div class="tracker-content">
+            <h1 class="tracker-title">Period Tracker 💕</h1>
+            
+            <div class="tracker-form">
+                <div class="form-group">
+                    <label>Last Period Start Date:</label>
+                    <input type="date" id="lastPeriodStartDate" class="date-input">
+                </div>
+                <div class="form-group">
+                    <label>Last Period End Date:</label>
+                    <input type="date" id="lastPeriodEndDate" class="date-input">
+                </div>
+                <div class="form-group">
+                    <label>Average Cycle Length (days):</label>
+                    <input type="number" id="cycleLength" value="28" min="21" max="35" class="number-input">
+                </div>
+                <button class="calculate-btn" onclick="calculatePeriod()">Calculate Next Period</button>
+            </div>
+            
+            <div class="tracker-result" id="trackerResult" style="display: none;">
+                <h3>Your Period Info 💖</h3>
+                <div id="result"></div>
+            </div>
+            
+            <button class="back-btn" onclick="hidePeriodTracker()">Back to Welcome</button>
+        </div>
+    </div>
+
+    <!-- Mood Tracker Page -->
+    <div id="moodTrackerPage" class="mood-tracker-page">
+        <!-- I Love You Background for Mood Tracker -->
+        <div class="mood-love-background" id="moodLoveBackground"></div>
+        
+        <!-- Theme Toggle for Mood Tracker -->
+        <div class="mood-theme-toggle">
+            <button id="moodThemeToggle" class="mood-theme-btn">
+                <span class="mood-light-icon">☀️</span>
+                <span class="mood-dark-icon">🌙</span>
+            </button>
+        </div>
+        
+        <div class="mood-content">
+            <h1 class="mood-title">How are you feeling today, my love? 💕</h1>
+            
+            <div class="mood-selection">
+                <h3>Select your mood:</h3>
+                <div class="mood-options">
+                    <button class="mood-option" onclick="selectMood('Happy')">😊 Happy</button>
+                    <button class="mood-option" onclick="selectMood('Sad')">😢 Sad</button>
+                    <button class="mood-option" onclick="selectMood('Excited')">🤩 Excited</button>
+                    <button class="mood-option" onclick="selectMood('Horny')">😏 Horny</button>
+                    <button class="mood-option" onclick="selectMood('Angry')">😠 Angry</button>
+                    <button class="mood-option" onclick="selectMood('Tired')">😴 Tired</button>
+                    <button class="mood-option" onclick="selectMood('Romantic')">🥰 Romantic</button>
+                    <button class="mood-option" onclick="selectMood('Playful')">😋 Playful</button>
+                    <button class="mood-option" onclick="selectMood('Stressed')">😰 Stressed</button>
+                    <button class="mood-option" onclick="selectMood('Confident')">😎 Confident</button>
+                </div>
+            </div>
+            
+            <div id="moodMessageSection" class="mood-message-section" style="display: none;">
+                <h3>Why are you feeling <span id="selectedMoodText"></span>?</h3>
+                <textarea id="moodMessage" placeholder="Tell me everything, my love... 💕" rows="4"></textarea>
+                <button class="send-mood-btn" onclick="sendMoodMessage()">Send to My Love 💕</button>
+            </div>
+            
+            <div id="moodAdviceSection" class="mood-advice-section" style="display: none;">
+                <h3>💕 Here's what I want you to do, my love 💕</h3>
+                <div id="moodAdvice" class="mood-advice"></div>
+                <button class="darling-btn" onclick="showDarlingAdvice()">Click Here Darling 💕</button>
+            </div>
+            
+            <button class="back-btn" onclick="hideMoodTracker()">Back to Welcome</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
