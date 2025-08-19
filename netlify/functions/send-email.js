@@ -71,26 +71,13 @@ exports.handler = async (event, context) => {
         }
 
         // Email configuration
-        console.log('Trying createTransporter...');
-        let transporter;
-        try {
-            transporter = nodemailer.createTransporter({
-                service: 'gmail',
-                auth: {
-                    user: process.env.EMAIL_USER,
-                    pass: process.env.EMAIL_PASS
-                }
-            });
-        } catch (error) {
-            console.log('createTransporter failed, trying createTransport...');
-            transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: process.env.EMAIL_USER,
-                    pass: process.env.EMAIL_PASS
-                }
-            });
-        }
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS
+            }
+        });
 
         // Email content
         const mailOptions = {
