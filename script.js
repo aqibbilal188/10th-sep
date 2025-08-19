@@ -1170,11 +1170,13 @@ window.sendMoodMessage = async function() {
             
             if (result.success) {
                 // Show success message and move to advice section
-                alert('💕 Message sent successfully! I love you! 💕');
+                console.log('💕 Message sent successfully! I love you! 💕');
                 currentMoodStep = 'advice';
                 showMoodAdvice();
             } else {
-                alert('Failed to send message. Please try again, my love! 💕');
+                console.log('Failed to send message, but showing advice anyway 💕');
+                currentMoodStep = 'advice';
+                showMoodAdvice();
             }
         } else {
             // If server is not available, still show the advice (offline mode)
@@ -1188,6 +1190,7 @@ window.sendMoodMessage = async function() {
         console.error('Error sending mood message:', error);
         console.error('Error details:', error.message);
         // If there's an error, still show the advice (offline mode)
+        console.log('Showing advice in offline mode due to error 💕');
         currentMoodStep = 'advice';
         showMoodAdvice();
     } finally {
