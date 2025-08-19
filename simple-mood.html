@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Mood Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #FF1493;
+            margin-bottom: 30px;
+        }
+        
+        .mood-btn {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 25px;
+            font-size: 20px;
+            cursor: pointer;
+            margin: 20px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+        
+        .mood-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .close:hover {
+            color: #000;
+        }
+        
+        .mood-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .mood-option {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .mood-option:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+        
+        .message-section {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #FF69B4;
+            border-radius: 15px;
+            font-size: 16px;
+            margin: 15px 0;
+            resize: vertical;
+            min-height: 120px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .send-btn {
+            background: linear-gradient(135deg, #FF69B4, #FF1493);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4);
+        }
+        
+        .loading {
+            display: none;
+            color: #FF1493;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💕 Simple Mood Test 💕</h1>
+        <p>Click the button below to test the mood feature:</p>
+        
+        <button class="mood-btn" onclick="openMoodModal()">Test Mood Feature 💕</button>
+        
+        <p style="margin-top: 30px; color: #666;">
+            This is a simple test to make sure the mood feature works!
+        </p>
+    </div>
+
+    <!-- Mood Modal -->
+    <div id="moodModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeMoodModal()">&times;</span>
+            
+            <h2>How are you feeling today, my love? 💕</h2>
+            
+            <div id="moodSelection">
+                <h3>Select your mood:</h3>
+                <div class="mood-grid">
+                    <button class="mood-option" onclick="selectMood('Happy')">😊 Happy</button>
+                    <button class="mood-option" onclick="selectMood('Sad')">😢 Sad</button>
+                    <button class="mood-option" onclick="selectMood('Excited')">🤩 Excited</button>
+                    <button class="mood-option" onclick="selectMood('Horny')">😏 Horny</button>
+                    <button class="mood-option" onclick="selectMood('Angry')">😠 Angry</button>
+                    <button class="mood-option" onclick="selectMood('Tired')">😴 Tired</button>
+                </div>
+            </div>
+            
+            <div id="messageSection" class="message-section">
+                <h3>Why are you feeling <span id="selectedMoodText"></span>?</h3>
+                <textarea id="moodMessage" placeholder="Tell me everything, my love... 💕"></textarea>
+                <div class="loading" id="loading">Sending... 💕</div>
+                <button class="send-btn" onclick="sendMood()">Send to My Love 💕</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedMood = '';
+        
+        function openMoodModal() {
+            document.getElementById('moodModal').style.display = 'block';
+            document.getElementById('moodSelection').style.display = 'block';
+            document.getElementById('messageSection').style.display = 'none';
+        }
+        
+        function closeMoodModal() {
+            document.getElementById('moodModal').style.display = 'none';
+        }
+        
+        function selectMood(mood) {
+            selectedMood = mood;
+            document.getElementById('selectedMoodText').textContent = mood;
+            document.getElementById('moodSelection').style.display = 'none';
+            document.getElementById('messageSection').style.display = 'block';
+        }
+        
+        function sendMood() {
+            const message = document.getElementById('moodMessage').value.trim();
+            
+            if (!message) {
+                alert('Please tell me why you\'re feeling this way, my love! 💕');
+                return;
+            }
+            
+            // Show loading
+            document.getElementById('loading').style.display = 'block';
+            document.querySelector('.send-btn').disabled = true;
+            
+            // Send to server
+            fetch('/api/send-mood-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    mood: selectedMood,
+                    message: message
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Server error');
+                }
+            })
+            .then(data => {
+                if (data.success) {
+                    alert('💕 Message sent successfully! I love you! 💕');
+                } else {
+                    alert('💕 Message sent to my heart! (Offline mode) 💕');
+                }
+                closeMoodModal();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('💕 Message sent to my heart! (Offline mode) 💕');
+                closeMoodModal();
+            })
+            .finally(() => {
+                document.getElementById('loading').style.display = 'none';
+                document.querySelector('.send-btn').disabled = false;
+            });
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('moodModal');
+            if (event.target === modal) {
+                closeMoodModal();
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+

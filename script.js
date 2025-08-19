@@ -1179,6 +1179,8 @@ window.sendMoodMessage = async function() {
         } else {
             // If server is not available, still show the advice (offline mode)
             console.log('Server not available, showing advice in offline mode');
+            const errorResult = await response.json();
+            console.log('Error details:', errorResult);
             currentMoodStep = 'advice';
             showMoodAdvice();
         }

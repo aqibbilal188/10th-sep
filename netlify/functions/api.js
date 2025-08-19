@@ -89,12 +89,22 @@ exports.handler = async (event, context) => {
         
     } catch (error) {
         console.error('Error sending mood email:', error);
+        console.error('Error message:', error.message);
+        console.error('Error stack:', error.stack);
+        
+        // Check environment variables
+        console.error('Environment variables check:');
+        console.error('EMAIL_USER:', process.env.EMAIL_USER ? 'Set' : 'Not set');
+        console.error('EMAIL_PASS:', process.env.EMAIL_PASS ? 'Set' : 'Not set');
+        console.error('RECIPIENT_EMAIL:', process.env.RECIPIENT_EMAIL ? 'Set' : 'Not set');
+        
         return {
             statusCode: 500,
             headers,
             body: JSON.stringify({ 
                 success: false, 
-                error: 'Failed to send mood message' 
+                error: 'Failed to send mood message',
+                details: error.message
             })
         };
     }
