@@ -1,5 +1,10 @@
 const nodemailer = require('nodemailer');
 
+// Debug nodemailer
+console.log('Nodemailer object:', typeof nodemailer);
+console.log('Nodemailer methods:', Object.keys(nodemailer));
+console.log('createTransporter available:', typeof nodemailer.createTransporter);
+
 exports.handler = async (event, context) => {
     // Enable CORS
     const headers = {
@@ -66,13 +71,26 @@ exports.handler = async (event, context) => {
         }
 
         // Email configuration
-        const transporter = nodemailer.createTransporter({
-            service: 'gmail',
-            auth: {
-                user: process.env.EMAIL_USER,
-                pass: process.env.EMAIL_PASS
-            }
-        });
+        console.log('Trying createTransporter...');
+        let transporter;
+        try {
+            transporter = nodemailer.createTransporter({
+                service: 'gmail',
+                auth: {
+                    user: process.env.EMAIL_USER,
+                    pass: process.env.EMAIL_PASS
+                }
+            });
+        } catch (error) {
+            console.log('createTransporter failed, trying createTransport...');
+            transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: process.env.EMAIL_USER,
+                    pass: process.env.EMAIL_PASS
+                }
+            });
+        }
 
         // Email content
         const mailOptions = {
